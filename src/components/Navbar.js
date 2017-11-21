@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 import { capitalize } from './../helpers'
 import Logo from './Logo'
@@ -12,7 +12,9 @@ class Navbar extends Component {
     return (
       <nav>
 
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
 
         <div className="tabs is-centered is-md-right">
           <ul>
@@ -44,11 +46,8 @@ class Navbar extends Component {
 
 }
 
-const mapStateToProps = ({ categories }) => {
-  return {
-    categories: Object.keys(categories).map(c => categories[c])
-  }
-}
+const mapStateToProps = ({ categories }) => ({
+  categories: Object.keys(categories).map(c => categories[c])
+})
 
-// FixMe - See https://github.com/ReactTraining/react-router/issues/3286
 export default withRouter(connect(mapStateToProps)(Navbar))

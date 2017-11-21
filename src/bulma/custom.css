@@ -31,7 +31,9 @@ nav svg {
   border-bottom: 1px solid black;
 }
 
-.posts-list {
+.posts-list,
+.post-detail,
+.comments {
   padding: 0 1rem;
 }
 
@@ -43,18 +45,24 @@ nav svg {
   margin-left: 0.5rem;
 }
 
-.post-listing h3 {
+.post {
+  margin: 0 0 1rem;
+}
+
+.post h3 {
   margin: 0 0 0.1em 0;
 }
 
-.post-listing .votes {
+.post .votes,
+.comment .votes {
   min-width: 3rem;
   text-align: center;
   font-family: monospace;
   position: relative
 }
 
-.post-listing .votes span {
+.post .votes span,
+.comment .votes span {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -67,35 +75,53 @@ nav svg {
   color: white;
 }
 
-.post-listing .votes .button {
+.post .votes .button,
+.comment .votes .button {
   border-radius: 1em;
   font-size: 0.5em;
   width: 2.2em;
 }
 
-.post-listing .votes .button:first-child {
+.post .votes .button:first-child,
+.comment .votes .button:first-child {
   position: relative;
   bottom: -1.5em;
 }
 
-.post-listing .votes .button:last-child {
+.post .votes .button:last-child,
+.comment .votes .button:last-child {
   position: relative;
   top: -1em;
 }
 
-.post-listing a p {
+.post a p {
   margin: 0 0 1rem;
 }
 
-.post-listing a p,
-.post-listing a p:hover {
+.post a p,
+.post a p:hover {
   color: #363636;
 }
 
-.post-listing .tags .tag {
+.post .tags .tag {
   margin-right: 0.5rem;
+}
+
+.comments .comment {
+  margin-top: 1rem;
+  padding: 0 2rem;
 }
 
 .button.is-primary {
   background-color: rgba(0, 82, 70, 0.3);
+}
+
+@media (min-width: 46rem) {
+  .post-detail {
+    margin: 0 -6rem;
+  }
+
+  .comments .comment {
+    padding: 0;
+  }
 }

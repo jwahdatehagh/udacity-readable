@@ -1,5 +1,6 @@
 import { addCategory } from './../store/actions/categories'
 import { addPost, deletePost } from './../store/actions/posts'
+import { addComment, deleteComment } from './../store/actions/comments'
 import store from './../store'
 
 const request = (url, options) => {
@@ -30,6 +31,21 @@ export async function fetchPosts (category) {
   })
 }
 
+export async function fetchPost (postId) {
+  const promises = [
+    request(`posts/${postId}`),
+    request(`posts/${postId}/comments`)
+  ]
+
+  const [ postResponse, commentsResponse ] = await Promise.all(promises)
+
+  const post = await postResponse.json()
+  store.dispatch(addPost(post))
+
+  const comments = await commentsResponse.json()
+  comments.forEach(comment => store.dispatch(addComment(comment)))
+}
+
 export async function voteForPost (post, option) {
   const response = await request(`posts/${post.id}`, {
     method: 'post',
@@ -48,6 +64,27 @@ export async function destroyPost (post) {
     store.dispatch(addPost(post))
   } catch (e) {
     store.dispatch(addPost(post))
+  }
+}
+
+export async function voteForComment (comment, option) {
+  const response = await request(`comments/${comment.id}`, {
+    method: 'post',
+    body: JSON.stringify({ option })
+  })
+  const newComment = await response.json()
+  store.dispatch(addComment(newComment))
+}
+
+export async function destroyComment (comment) {
+  store.dispatch(deleteComment(comment))
+
+  try {
+    const response = await request(`comments/${comment.id}/`, { method: 'delete' })
+    comment = await response.json()
+    store.dispatch(addComment(comment))
+  } catch (e) {
+    store.dispatch(addComment(comment))
   }
 }
 
