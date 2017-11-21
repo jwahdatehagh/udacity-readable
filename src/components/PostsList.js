@@ -12,7 +12,8 @@ import {
 class PostsList extends Component {
 
   state = {
-    categoryId: null
+    categoryId: null,
+    sortBy: 'voteScore'
   }
 
   constructor (props) {
@@ -20,6 +21,7 @@ class PostsList extends Component {
     this.componentDidMount = this.componentDidMount.bind(this)
     this.componentDidUpdate = this.componentDidUpdate.bind(this)
     this.updateCategory = this.updateCategory.bind(this)
+    this.changeSorting = this.changeSorting.bind(this)
   }
 
   componentDidMount () {
@@ -42,11 +44,24 @@ class PostsList extends Component {
   }
 
   filterPosts (posts, category) {
-    posts = posts.filter(p => p.deleted !== true)
+    const sortBy = this.state.sortBy
+
+    posts = posts
+      .filter(p => p.deleted !== true)
+      .sort((p1, p2) => {
+        if (p1[sortBy] > p2[sortBy]) return 1
+        else if (p1[sortBy] < p2[sortBy]) return -1
+        else return 0
+      })
+      .reverse()
 
     return category.path
       ? posts.filter(p => p.category === category.path)
       : posts
+  }
+
+  changeSorting (e) {
+    this.setState({sortBy: e.target.value});
   }
 
   render() {
@@ -61,9 +76,9 @@ class PostsList extends Component {
           </Level.Left>
           <Level.Right>
             <div className="select is-small">
-              <select>
-                <option>Filter by popularity</option>
-                <option>Filter by timestamp</option>
+              <select value={this.state.sortBy} onChange={this.changeSorting}>
+                <option value="voteScore">Most popular first</option>
+                <option value="timestamp">Newest first</option>
               </select>
             </div>
             <button className="button is-primary is-small">New Post</button>

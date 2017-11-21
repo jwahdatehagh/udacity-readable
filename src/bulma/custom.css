@@ -47,6 +47,42 @@ nav svg {
   margin: 0 0 0.1em 0;
 }
 
+.post-listing .votes {
+  min-width: 3rem;
+  text-align: center;
+  font-family: monospace;
+  position: relative
+}
+
+.post-listing .votes span {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: rgba(0, 82, 70, 0.3);
+  display: inline-block;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.post-listing .votes .button {
+  border-radius: 1em;
+  font-size: 0.5em;
+  width: 2.2em;
+}
+
+.post-listing .votes .button:first-child {
+  position: relative;
+  bottom: -1.5em;
+}
+
+.post-listing .votes .button:last-child {
+  position: relative;
+  top: -1em;
+}
+
 .post-listing a p {
   margin: 0 0 1rem;
 }
@@ -58,4 +94,8 @@ nav svg {
 
 .post-listing .tags .tag {
   margin-right: 0.5rem;
+}
+
+.button.is-primary {
+  background-color: rgba(0, 82, 70, 0.3);
 }

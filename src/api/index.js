@@ -5,6 +5,7 @@ import store from './../store'
 const request = (url, options) => {
   const headers = new Headers()
   headers.append('Authorization', 'crezy-key')
+  headers.append('Content-Type', 'application/json')
 
   return fetch(`http://localhost:3001/${url}`, { ...options, headers })
 }
@@ -27,6 +28,15 @@ export async function fetchPosts (category) {
   posts.forEach(post => {
     store.dispatch(addPost(post))
   })
+}
+
+export async function voteForPost (post, option) {
+  const response = await request(`posts/${post.id}`, {
+    method: 'post',
+    body: JSON.stringify({ option })
+  })
+  const updatedPost = await response.json()
+  store.dispatch(addPost(updatedPost))
 }
 
 export async function destroyPost (post) {

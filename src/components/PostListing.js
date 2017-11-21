@@ -13,7 +13,7 @@ import {
   Delete,
   Tag
 } from './../bulma'
-import { destroyPost } from './../api'
+import { destroyPost, voteForPost } from './../api'
 
 class PostListing extends Component {
 
@@ -25,25 +25,37 @@ class PostListing extends Component {
     super(props)
 
     this.deletePost = this.deletePost.bind(this)
+    this.upvotePost = this.upvotePost.bind(this)
+    this.downvotePost = this.downvotePost.bind(this)
   }
 
   componentDidMount () {
     this.setState({ post: this.props.post })
   }
 
-  async deletePost () {
+  deletePost () {
     if (window.confirm('Are you sure you want to delete this post?')) {
-      await destroyPost(this.state.post)
+      destroyPost(this.state.post)
     }
   }
 
+  upvotePost = () => voteForPost(this.state.post, 'upVote')
+  downvotePost = () => voteForPost(this.state.post, 'downVote')
+
   render () {
     const post = this.props.post
-    const { title, body, category, commentCount } = post
+    const { title, body, category, commentCount, voteScore } = post
 
     return (
       <Box className="post-listing">
         <Media>
+          <Media.Left>
+            <p className="votes">
+              <button className="button is-small" onClick={this.upvotePost}>+</button>
+              <span>{voteScore}</span>
+              <button className="button is-small" onClick={this.downvotePost}>-</button>
+            </p>
+          </Media.Left>
           <Media.Content>
             <Link to={''}>
               <h3 className="is-size-5">{title}</h3>
