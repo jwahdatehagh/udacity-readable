@@ -1,4 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { NavLink } from 'react-router-dom'
+
+import { fetchCategories } from './../api'
+import { capitalize } from './../helpers'
 import Logo from './Logo'
 
 class Navbar extends Component {
@@ -11,10 +17,25 @@ class Navbar extends Component {
 
         <div className="tabs is-centered is-md-right">
           <ul>
-            <li className="is-active"><a>Category 1</a></li>
-            <li><a>Category 2</a></li>
-            <li><a>Category 3</a></li>
-            <li><a>Category 4</a></li>
+            <li>
+              <NavLink
+                to="/"
+                exact
+                activeClassName="is-active"
+              >All</NavLink>
+            </li>
+
+            {this.props.categories.map(category => (
+              <NavLink
+                to={{
+                  pathname: `/category/${category.path}`
+                }}
+                activeClassName="is-active"
+                key={category.path}
+              >
+                {capitalize(category.name)}
+              </NavLink>
+            ))}
           </ul>
         </div>
 
@@ -24,4 +45,11 @@ class Navbar extends Component {
 
 }
 
-export default Navbar
+const mapStateToProps = ({ categories }) => {
+  return {
+    categories: Object.keys(categories).map(c => categories[c])
+  }
+}
+
+// FixMe - See https://github.com/ReactTraining/react-router/issues/3286
+export default withRouter(connect(mapStateToProps)(Navbar))

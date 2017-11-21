@@ -3,14 +3,34 @@ body {
   min-height: 100vh;
 }
 
+.App {
+  max-width: 35rem;
+}
+
+nav {
+  margin-bottom: 2rem;
+}
+
 nav svg {
   margin: 1rem auto;
 }
 
-nav .tabs ul {
-  border-color: transparent;
+.tabs {
+  padding: 0 1rem;
+}
+
+.tabs ul {
+  border-color: white;
 }
 
 .tabs a {
   border-bottom-color: white;
+}
+
+.tabs a.is-active {
+  border-bottom: 1px solid black;
+}
+
+.posts-list {
+  padding: 0 1rem;
 }
