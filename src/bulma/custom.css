@@ -34,3 +34,28 @@ nav svg {
 .posts-list {
   padding: 0 1rem;
 }
+
+.posts-list h2 {
+  margin: 0;
+}
+
+.posts-list .level-right .button {
+  margin-left: 0.5rem;
+}
+
+.post-listing h3 {
+  margin: 0 0 0.1em 0;
+}
+
+.post-listing a p {
+  margin: 0 0 1rem;
+}
+
+.post-listing a p,
+.post-listing a p:hover {
+  color: #363636;
+}
+
+.post-listing .tags .tag {
+  margin-right: 0.5rem;
+}

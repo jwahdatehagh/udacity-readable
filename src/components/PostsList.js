@@ -4,6 +4,10 @@ import { withRouter } from 'react-router'
 
 import { fetchPosts } from './../api'
 import { capitalize } from './../helpers'
+import PostListing from './PostListing'
+import {
+  Level
+} from './../bulma'
 
 class PostsList extends Component {
 
@@ -49,13 +53,26 @@ class PostsList extends Component {
 
     return (
       <div className="posts-list content">
-        <h3>{capitalize(category.name || 'all')} Posts</h3>
+        <Level>
+          <Level.Left>
+            <h2>{capitalize(category.name || 'all')} Posts</h2>
+          </Level.Left>
+          <Level.Right>
+            <div class="select is-small">
+              <select>
+                <option>Filter by popularity</option>
+                <option>Filter by timestamp</option>
+              </select>
+            </div>
+            <button className="button is-primary is-small">New Post</button>
+          </Level.Right>
+        </Level>
 
-        <ul>
+        <div className="posts">
           {posts.map(post => (
-            <li key={post.id}>{post.title}</li>
+            <PostListing post={post} key={post.id} />
           ))}
-        </ul>
+        </div>
       </div>
     )
   }
