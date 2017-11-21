@@ -42,6 +42,8 @@ class PostsList extends Component {
   }
 
   filterPosts (posts, category) {
+    posts = posts.filter(p => p.deleted !== true)
+
     return category.path
       ? posts.filter(p => p.category === category.path)
       : posts
@@ -58,7 +60,7 @@ class PostsList extends Component {
             <h2>{capitalize(category.name || 'all')} Posts</h2>
           </Level.Left>
           <Level.Right>
-            <div class="select is-small">
+            <div className="select is-small">
               <select>
                 <option>Filter by popularity</option>
                 <option>Filter by timestamp</option>
@@ -69,9 +71,14 @@ class PostsList extends Component {
         </Level>
 
         <div className="posts">
-          {posts.map(post => (
-            <PostListing post={post} key={post.id} />
-          ))}
+          {posts.length
+            ? posts.map(post => (
+              <PostListing post={post} key={post.id} />
+            ))
+            : (
+              <p className="has-tex-centered">No posts yet. Create one!</p>
+            )
+          }
         </div>
       </div>
     )

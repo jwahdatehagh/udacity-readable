@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
 
-import { fetchCategories } from './../api'
 import { capitalize } from './../helpers'
 import Logo from './Logo'
 
