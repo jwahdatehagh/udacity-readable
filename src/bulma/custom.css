@@ -1,0 +1,16 @@
+body {
+  background-color: #C9E3E3;
+  min-height: 100vh;
+}
+
+nav svg {
+  margin: 1rem auto;
+}
+
+nav .tabs ul {
+  border-color: transparent;
+}
+
+.tabs a {
+  border-bottom-color: white;
+}

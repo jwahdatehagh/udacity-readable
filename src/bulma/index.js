@@ -1,4 +1,5 @@
 import 'bulma/css/bulma.css'
+import './custom.css'
 
 export { default as Box } from 'reactbulma/lib/components/Box/Box'
 export { default as Button } from 'reactbulma/lib/components/Button/Button'
