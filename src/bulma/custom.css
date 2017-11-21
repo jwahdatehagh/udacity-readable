@@ -116,6 +116,10 @@ nav svg {
   background-color: rgba(0, 82, 70, 0.3);
 }
 
+.new-comment {
+  margin: 1rem 0 0;
+}
+
 @media (min-width: 46rem) {
   .post-detail {
     margin: 0 -6rem;

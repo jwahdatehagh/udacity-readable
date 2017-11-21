@@ -8,6 +8,7 @@ import { Tag } from './../bulma'
 import { fetchPost } from './../api'
 import Post from './Post'
 import Comment from './Comment'
+import NewComment from './NewComment'
 
 class PostDetail extends Component {
 
@@ -26,31 +27,34 @@ class PostDetail extends Component {
           : 0
       ))
 
+    if (!post) {
+      return (
+        <p className="has-text-centered">Loading...</p>
+      )
+    }
+
     return (
       <div className="content">
         <div className="post-detail">
-          { post
-            ? (
-              <Post post={post}>
-                <h1 className="is-size-3">{post.title}</h1>
-                <p>{post.body}</p>
-                <div className="tags">
-                  <Link to={`/category/${post.category}`} >
-                    <Tag light># {post.category}</Tag>
-                  </Link>
-                  <Tag light>By: {post.author}</Tag>
-                  <Tag light>{timeago().format(post.timestamp)}</Tag>
-                </div>
-              </Post>
-            )
-            : <p className="has-text-centered">Loading...</p>
-          }
+          <Post post={post}>
+            <h1 className="is-size-3">{post.title}</h1>
+            <p>{post.body}</p>
+            <div className="tags">
+              <Link to={`/category/${post.category}`} >
+                <Tag light># {post.category}</Tag>
+              </Link>
+              <Tag light>By: {post.author}</Tag>
+              <Tag light>{timeago().format(post.timestamp)}</Tag>
+            </div>
+          </Post>
         </div>
 
         <div className="comments">
           { comments.map(comment => (
             <Comment comment={comment} key={comment.id} />
           ))}
+
+          <NewComment postId={post.id} />
         </div>
       </div>
     )

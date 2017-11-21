@@ -67,6 +67,15 @@ export async function destroyPost (post) {
   }
 }
 
+export async function createComment (data) {
+  const response = await request('comments', {
+    method: 'post',
+    body: JSON.stringify(data)
+  })
+  const comment = await response.json()
+  store.dispatch(addComment(comment))
+}
+
 export async function voteForComment (comment, option) {
   const response = await request(`comments/${comment.id}`, {
     method: 'post',
