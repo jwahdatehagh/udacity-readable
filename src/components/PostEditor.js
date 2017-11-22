@@ -131,7 +131,7 @@ class PostEditor extends Component {
           <Field>
             <Control>
               <Button type="submit" primary small loading={this.state.loading}>
-                Save Comment
+                Save Post
               </Button>
             </Control>
           </Field>

@@ -133,8 +133,9 @@ nav svg {
   color: #363636;
 }
 
-.post .tags .tag {
-  margin-right: 0.5rem;
+.post .tags .tag,
+.comment .tags .tag {
+  margin: 0 0.5rem 0.35rem 0;
 }
 
 .media {
@@ -149,7 +150,11 @@ nav svg {
 
 .comments .comment {
   margin-top: 1rem;
-  padding: 0 2rem;
+  padding: 0 1rem;
+}
+
+.comment .tags {
+  margin-top: 1rem;
 }
 
 .button.is-primary {
