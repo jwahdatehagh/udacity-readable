@@ -9,7 +9,7 @@ import {
   Input,
   Button
 } from './../bulma'
-import { createComment } from './../api'
+import { saveComment } from './../api'
 
 class CommentEditor extends Component {
 
@@ -56,7 +56,9 @@ class CommentEditor extends Component {
 
     try {
       this.setState({ loading: true })
-      await createComment(data)
+      this.state.id
+        ? await saveComment(data, 'put')
+        : await saveComment(data, 'post')
       this.setState({ loading: false })
     } catch (e) {
       // Something went wrong

@@ -2,8 +2,7 @@ import React from 'react'
 
 import {
   Box,
-  Media,
-  Delete,
+  Media
 } from './../bulma'
 
 export default (props) => (

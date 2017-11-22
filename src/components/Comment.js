@@ -2,16 +2,13 @@ import React, { Component } from 'react'
 import timeago from 'timeago.js'
 
 import {
-  Control,
-  Field,
-  Tag,
-  Button,
-  Icon
+  Tag
 } from './../bulma'
 import { destroyComment } from './../api'
 import Content from './Content'
 import ContentVoter from './ContentVoter'
 import CommentEditor from './CommentEditor'
+import ContentTools from './ContentTools'
 import { capitalize } from './../helpers'
 
 class Comment extends Component {
@@ -50,24 +47,7 @@ class Comment extends Component {
           ? <CommentEditor comment={comment} afterSave={this.toggleEdit}/>
           : <Content
               left={<ContentVoter content={comment} type="comment" />}
-              right={
-                <Field className="has-addons">
-                  <Control>
-                    <Button onClick={this.toggleEdit} small>
-                      <Icon small>
-                        <i className="fa fa-pencil"></i>
-                      </Icon>
-                    </Button>
-                  </Control>
-                  <Control>
-                    <Button onClick={this.deleteComment} small>
-                      <Icon small>
-                        <i className="fa fa-trash-o"></i>
-                      </Icon>
-                    </Button>
-                  </Control>
-                </Field>
-              }
+              right={<ContentTools onEdit={this.toggleEdit} onDelete={this.deleteComment} />}
               tags={
                 <span>
                   <Tag light>By: {capitalize(author)}</Tag>

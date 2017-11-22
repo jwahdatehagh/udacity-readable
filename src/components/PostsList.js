@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import { fetchPosts } from './../api'
 import { capitalize } from './../helpers'
 import PostListing from './PostListing'
-import {
-  Level
-} from './../bulma'
+import { Level } from './../bulma'
 
 class PostsList extends Component {
 
@@ -81,7 +80,9 @@ class PostsList extends Component {
                 <option value="timestamp">Newest first</option>
               </select>
             </div>
-            <button className="button is-primary is-small">New Post</button>
+            <Link to="/new">
+              <button className="button is-primary is-small">New Post</button>
+            </Link>
           </Level.Right>
         </Level>
 

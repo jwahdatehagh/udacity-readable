@@ -55,6 +55,18 @@ export async function voteForPost (post, option) {
   store.dispatch(addPost(updatedPost))
 }
 
+export async function savePost (data, method = 'post') {
+  const url = method === 'post'
+    ? 'posts'
+    : `posts/${data.id}`
+  const response = await request(url, {
+    method,
+    body: JSON.stringify(data)
+  })
+  const post = await response.json()
+  store.dispatch(addPost(post))
+}
+
 export async function destroyPost (post) {
   store.dispatch(deletePost(post))
 
@@ -67,9 +79,13 @@ export async function destroyPost (post) {
   }
 }
 
-export async function createComment (data) {
-  const response = await request('comments', {
-    method: 'post',
+export async function saveComment (data, method = 'post') {
+  const url = method === 'post'
+    ? 'comments'
+    : `comments/${data.id}`
+
+  const response = await request(url, {
+    method,
     body: JSON.stringify(data)
   })
   const comment = await response.json()

@@ -33,6 +33,7 @@ nav svg {
 
 .posts-list,
 .post-detail,
+.new-post,
 .comments {
   padding: 0 1rem;
 }
@@ -122,8 +123,9 @@ nav svg {
   display: inline-block;
 }
 
-.post a p {
+.post p {
   margin: 0 0 1rem;
+  white-space: pre-line;
 }
 
 .post a p,
