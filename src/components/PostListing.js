@@ -10,11 +10,5 @@ export default ({ post }) => (
       <h3 className="is-size-5">{post.title}</h3>
       <p>{post.body}</p>
     </Link>
-    <div className="tags">
-      <Link to={`/category/${post.category}`} >
-        <Tag light># {post.category}</Tag>
-      </Link>
-      <Tag light>{post.commentCount} { post.commentCount !== 1 ? 'comments' : 'comment' }</Tag>
-    </div>
   </Post>
 )

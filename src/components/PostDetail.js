@@ -36,16 +36,12 @@ class PostDetail extends Component {
     return (
       <div className="content">
         <div className="post-detail">
-          <Post post={post}>
+          <Post
+            post={post}
+            tags={ <Tag light>{timeago().format(post.timestamp)}</Tag> }
+          >
             <h1 className="is-size-3">{post.title}</h1>
             <p>{post.body}</p>
-            <div className="tags">
-              <Link to={`/category/${post.category}`} >
-                <Tag light># {post.category}</Tag>
-              </Link>
-              <Tag light>By: {post.author}</Tag>
-              <Tag light>{timeago().format(post.timestamp)}</Tag>
-            </div>
           </Post>
         </div>
 

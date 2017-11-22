@@ -37,6 +37,10 @@ nav svg {
   padding: 0 1rem;
 }
 
+.post-detail > .post > .box > .media {
+  min-height: 9rem;
+}
+
 .posts-list h2 {
   margin: 0;
 }
@@ -49,7 +53,8 @@ nav svg {
   margin: 0 0 1rem;
 }
 
-.post h3 {
+.post h3,
+.post h1 {
   margin: 0 0 0.1em 0;
 }
 
@@ -94,6 +99,29 @@ nav svg {
   top: -1em;
 }
 
+.post,
+.comment {
+  position: relative;
+}
+
+.post .box,
+.comment .box {
+  border-radius: 10px;
+}
+
+.post .delete,
+.comment .delete {
+  position: absolute;
+  top: -0.001rem;
+  right: -0.001rem;
+  display: none;
+}
+
+.post:hover .delete,
+.comment:hover .delete {
+  display: inline-block;
+}
+
 .post a p {
   margin: 0 0 1rem;
 }
@@ -105,6 +133,16 @@ nav svg {
 
 .post .tags .tag {
   margin-right: 0.5rem;
+}
+
+.media {
+  align-items: stretch;
+}
+
+.media-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .comments .comment {

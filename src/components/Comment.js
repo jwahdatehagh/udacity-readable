@@ -1,17 +1,36 @@
 import React, { Component } from 'react'
 import timeago from 'timeago.js'
 
-import { Tag } from './../bulma'
+import {
+  Control,
+  Field,
+  Tag,
+  Button,
+  Icon
+} from './../bulma'
+import { destroyComment } from './../api'
 import Content from './Content'
 import ContentVoter from './ContentVoter'
-import { destroyComment } from './../api'
+import CommentEditor from './CommentEditor'
+import { capitalize } from './../helpers'
 
 class Comment extends Component {
+
+  state = {
+    editing: false
+  }
 
   constructor (props) {
     super(props)
 
     this.deleteComment = this.deleteComment.bind(this)
+    this.toggleEdit = this.toggleEdit.bind(this)
+  }
+
+  toggleEdit () {
+    this.setState({
+      editing: !this.state.editing
+    })
   }
 
   deleteComment () {
@@ -22,19 +41,44 @@ class Comment extends Component {
 
   render () {
     const comment = this.props.comment
+    const { author, body, timestamp } = comment
 
     return (
       <div className="comment">
-        <Content
-          left={<ContentVoter content={comment} type="comment" />}
-          onDelete={this.deleteComment}
-        >
-          <p className="is-size-6">{comment.body}</p>
-          <div className="tags">
-            <Tag light>By: {comment.author}</Tag>
-            <Tag light>{timeago().format(comment.timestamp)}</Tag>
-          </div>
-        </Content>
+        {
+          this.state.editing
+          ? <CommentEditor comment={comment} afterSave={this.toggleEdit}/>
+          : <Content
+              left={<ContentVoter content={comment} type="comment" />}
+              right={
+                <Field className="has-addons">
+                  <Control>
+                    <Button onClick={this.toggleEdit} small>
+                      <Icon small>
+                        <i className="fa fa-pencil"></i>
+                      </Icon>
+                    </Button>
+                  </Control>
+                  <Control>
+                    <Button onClick={this.deleteComment} small>
+                      <Icon small>
+                        <i className="fa fa-trash-o"></i>
+                      </Icon>
+                    </Button>
+                  </Control>
+                </Field>
+              }
+              tags={
+                <span>
+                  <Tag light>By: {capitalize(author)}</Tag>
+                  <Tag light>{timeago().format(timestamp)}</Tag>
+                </span>
+              }
+              onDelete={this.deleteComment}
+            >
+              <p className="is-size-6">{body}</p>
+            </Content>
+        }
       </div>
     )
   }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import ContentVoter from './ContentVoter'
 import Content from './Content'
 import { destroyPost } from './../api'
+import { Tag } from './../bulma'
 
 class Post extends Component {
 
@@ -25,6 +27,15 @@ class Post extends Component {
       <div className="post">
         <Content
           left={<ContentVoter content={post} type="post" />}
+          tags={
+            <span>
+              <Link to={`/category/${post.category}`} >
+                <Tag light># {post.category}</Tag>
+              </Link>
+              <Tag light>By: {post.author}</Tag>
+              {this.props.tags}
+            </span>
+          }
           onDelete={this.deletePost}
         >
           {this.props.children}
