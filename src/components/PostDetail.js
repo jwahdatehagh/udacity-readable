@@ -8,15 +8,27 @@ import { fetchPost } from './../api'
 import Post from './Post'
 import Comment from './Comment'
 import NewComment from './NewComment'
+import NoMatch from './NoMatch'
 
 class PostDetail extends Component {
 
-  componentDidMount () {
-    fetchPost(this.props.match.params.postId)
+  state = {
+    loading: false
+  }
+
+  async componentDidMount () {
+    this.setState({ loading: true })
+    await fetchPost(this.props.match.params.postId)
+    this.setState({ loading: false })
   }
 
   render () {
     const post = this.props.posts[this.props.match.params.postId]
+
+    if (this.state.loading) return <p className="has-text-centered">Loading...</p>
+
+    if (!post) return <NoMatch />
+
     const comments = this.props.comments
       .filter(comment => comment.parentId === post.id && comment.deleted !== true)
       .sort((c1, c2) => (c1.voteScore > c2.voteScore
@@ -25,12 +37,6 @@ class PostDetail extends Component {
           ? 1
           : 0
       ))
-
-    if (!post) {
-      return (
-        <p className="has-text-centered">Loading...</p>
-      )
-    }
 
     return (
       <div className="content">
