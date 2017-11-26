@@ -7,7 +7,6 @@ import { Tag } from './../bulma'
 export default ({ post }) => (
   <Post
     post={post}
-    hideRight={true}
     tags={
       <Tag light>{post.commentCount} {post.commentCount === 1 ? 'comment' : 'comments'}</Tag>
     }
