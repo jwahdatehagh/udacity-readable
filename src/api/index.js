@@ -40,6 +40,8 @@ export async function fetchPost (postId) {
   const [ postResponse, commentsResponse ] = await Promise.all(promises)
 
   const post = await postResponse.json()
+  if (!(post && post.id)) return
+
   store.dispatch(addPost(post))
 
   const comments = await commentsResponse.json()
