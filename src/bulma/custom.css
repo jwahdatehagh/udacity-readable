@@ -53,6 +53,9 @@ nav svg {
 .post {
   margin: 0 0 1rem;
 }
+.post:last-child {
+  margin: 0;
+}
 
 .post h3,
 .post h1 {
