@@ -22,7 +22,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={PostsList} />
           <Route path="/category/:categoryId" component={PostsList} />
-          <Route path="/post/:postId" component={PostDetail} />
+          <Route path="/:categoryId/:postId" component={PostDetail} />
           <Route path="/new" component={NewPost} />
           <Route component={NoMatch} />
         </Switch>

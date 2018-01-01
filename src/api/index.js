@@ -1,5 +1,5 @@
 import { addCategory } from './../store/actions/categories'
-import { addPost, deletePost } from './../store/actions/posts'
+import { addPost, deletePost, updateCommentCount } from './../store/actions/posts'
 import { addComment, deleteComment } from './../store/actions/comments'
 import store from './../store'
 
@@ -92,6 +92,7 @@ export async function saveComment (data, method = 'post') {
   })
   const comment = await response.json()
   store.dispatch(addComment(comment))
+  store.dispatch(updateCommentCount(comment.parentId, 1))
 }
 
 export async function voteForComment (comment, option) {
@@ -113,6 +114,8 @@ export async function destroyComment (comment) {
   } catch (e) {
     store.dispatch(addComment(comment))
   }
+
+  store.dispatch(updateCommentCount(comment.parentId, -1))
 }
 
 export default request

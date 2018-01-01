@@ -52,6 +52,7 @@ class Post extends Component {
                   </Link>
                   <Tag light>By: {post.author}</Tag>
                   {this.props.tags}
+                  <Tag light>{post.commentCount} {post.commentCount === 1 ? 'comment' : 'comments'}</Tag>
                 </span>
               }
             >
